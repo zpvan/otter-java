@@ -48,6 +48,20 @@ apply(apply(doc, a), b') == apply(apply(doc, b), a')
 
 运行控制台演示(见下文)可以逐步观察这一过程。
 
+## 同类算法与权衡
+
+操作转换(OT)是实时协同编辑的三种主流方案之一:
+
+| 方案 | 代表实现 | 优势 | 劣势 |
+| --- | --- | --- | --- |
+| **OT**(本库) | Google Docs、[ShareDB](https://github.com/share/sharedb)、[ot.js](https://github.com/Operational-Transformation/ot.js) | 文档模型紧凑(无逐字符元数据、无墓碑),内存占用低,保留用户编辑意图,久经生产验证 | 需要中心协调点来确定操作的全序;每一对操作类型都要编写并证明 transform 函数,操作种类越多越难做对 |
+| **CRDT** | [Yjs](https://github.com/yjs/yjs)、[Automerge](https://github.com/automerge/automerge) | 完全去中心化:任意节点可随时按任意顺序合并,离线/P2P 支持极好,没有 transform 函数写错的风险 | 逐字符标识符和墓碑会膨胀内存与文档体积;垃圾回收实现复杂;某些语义(如移动区间、注解)更难表达 |
+| **差异同步** | [diff-match-patch](https://github.com/google/diff-match-patch)(Google Mobwrite) | 实现简单,直接复用现有 diff/patch 工具 | 以锁步的补丁周期工作,高并发编辑下退化;收敛性的形式化保证弱于 OT/CRDT |
+
+OT 家族内部也有多种控制算法(Jupiter、COT、GOT、adOPTed)。Otter 采用与 Jupiter 相同的以服务器为中心的模型:由中心化的 `EditorControl` 确定操作全序,客户端基于它做 transform。可视化入门见 [operational-transformation.github.io](https://operational-transformation.github.io/),CRDT 视角见 [crdt.tech](https://crdt.tech/)。
+
+一句话总结:有(或想要)中心服务器、且在意文档模型紧凑,选 **OT**;需要去中心化或离线优先协作、且能接受元数据开销,选 **CRDT**。
+
 ## 环境要求
 
 - Java 21+

@@ -66,6 +66,29 @@ is locked, and to compact operation history.
 
 Run the console demo (see below) to watch this happen step by step.
 
+## Alternatives and trade-offs
+
+Operational Transformation is one of three mainstream approaches to
+real-time collaborative editing:
+
+| Approach | Used by | Strengths | Weaknesses |
+| --- | --- | --- | --- |
+| **OT** (this library) | Google Docs, [ShareDB](https://github.com/share/sharedb), [ot.js](https://github.com/Operational-Transformation/ot.js) | Compact document model (no per-character metadata or tombstones), low memory, preserves user intent, battle-tested | Needs a central coordination point for a total order of operations; transform functions must be written and proven correct for every pair of operation types, which gets hard as the operation set grows |
+| **CRDT** | [Yjs](https://github.com/yjs/yjs), [Automerge](https://github.com/automerge/automerge) | Fully decentralized: peers can merge in any order at any time, excellent offline/P2P support, no transform functions to get wrong | Per-character identifiers and tombstones grow memory and document size; garbage-collecting them is non-trivial; some semantics (e.g. moving ranges, annotations) are harder to express |
+| **Differential sync** | [diff-match-patch](https://github.com/google/diff-match-patch) (Google Mobwrite) | Simple to implement on top of existing diff/patch tools | Works in lock-step patch cycles and degrades under high edit concurrency; weaker formal convergence guarantees than OT/CRDT |
+
+Within the OT family itself there are several control algorithms (Jupiter,
+COT, GOT, adOPTed); Otter follows the same server-centric model as Jupiter:
+a central `EditorControl` establishes a total order, and clients transform
+against it. See [operational-transformation.github.io](https://operational-transformation.github.io/)
+for a visual introduction and [crdt.tech](https://crdt.tech/) for the CRDT
+perspective.
+
+In short: choose **OT** when you have (or want) a central server and care
+about a compact document model; choose a **CRDT** when you need
+decentralized or offline-first collaboration and can afford the metadata
+overhead.
+
 ## Requirements
 
 - Java 21+
