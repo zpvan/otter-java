@@ -23,7 +23,8 @@ with `mvn install`.
 - `DeltaPrinter` for human-readable rendering of string operations.
 - Regression tests for `SharedString.insert()` and `remove()`, plus a
   concurrent-insert convergence test.
-- `CONTRIBUTING.md`, CI badge and build/demo instructions in `README.md`.
+- `CONTRIBUTING.md`, CI badge, build/demo instructions and a "How
+  Operational Transformation works" walkthrough in `README.md`.
 
 ### Changed
 

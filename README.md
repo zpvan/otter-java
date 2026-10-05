@@ -7,6 +7,63 @@ Otter is a library to support collaborative realtime editing using
 This repository contains the Java-implementation (forked from
 [LevelFourAB/otter-java](https://github.com/LevelFourAB/otter-java)).
 
+## How Operational Transformation works
+
+### Documents and operations
+
+A document is a sequence of characters. An edit is expressed as a *delta*: an
+ordered sequence of `retain(n)`, `insert(s)` and `delete(s)` steps applied
+left to right, e.g. `retain(5) insert(" A")`. A delta's *input length*
+(retained + deleted characters) must equal the length of the document it is
+applied to.
+
+### Transform
+
+When two clients edit the same version concurrently, their operations are
+*transformed* against each other: each operation is rewritten so that it can
+be applied on top of the other one. Given two operations `a` and `b` based on
+the same document, transform produces `a'` and `b'` such that
+
+```
+apply(apply(doc, a), b') == apply(apply(doc, b), a')
+```
+
+This is the convergence property: no matter in which order the operations
+arrive, all clients end up with the same document.
+
+Example (scenario 1 of the console demo), initial document `hello`:
+
+- Client A applies `retain(5) insert(" A")` → `hello A`
+- Client B applies `insert("B ") retain(5)` → `B hello`
+
+Both edits happen concurrently. When the operations cross, the engine
+transforms them:
+
+- B receives A's operation transformed to `retain(7) insert(" A")` → `B hello A`
+- A receives B's operation transformed to `insert("B ") retain(7)` → `B hello A`
+
+Both converge on `B hello A` with no manual conflict resolution.
+
+### Compose
+
+Two consecutive operations can be merged into a single equivalent one
+(`compose`). The engine uses this to batch local edits made while an editor
+is locked, and to compact operation history.
+
+### How this maps to the code
+
+- `otter-operations` implements the data model plus the transform and compose
+  functions for strings, lists and maps; `CombinedType` combines several of
+  them keyed by object id.
+- `EditorControl` (e.g. `DefaultEditorControl`) is the authoritative side: it
+  stores incoming operations and transforms them against everything that
+  happened since the client's base version.
+- `Editor` (e.g. `DefaultEditor`) is the client side: it applies local
+  operations immediately and transforms incoming remote operations against
+  its pending local edits.
+
+Run the console demo (see below) to watch this happen step by step.
+
 ## Requirements
 
 - Java 21+
