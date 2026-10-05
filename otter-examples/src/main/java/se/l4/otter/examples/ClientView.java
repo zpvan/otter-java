@@ -1,4 +1,4 @@
-package com.ot.visual;
+package se.l4.otter.examples;
 
 import se.l4.otter.engine.DefaultEditor;
 import se.l4.otter.engine.Editor;

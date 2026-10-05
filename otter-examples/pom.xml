@@ -11,8 +11,8 @@
 		<relativePath>..</relativePath>
 	</parent>
 
-	<artifactId>my-ot</artifactId>
-	<name>Otter Visual Demo</name>
+	<artifactId>otter-examples</artifactId>
+	<name>Otter Examples</name>
 
 	<dependencies>
 		<dependency>

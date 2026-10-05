@@ -1,4 +1,4 @@
-package com.ot.visual;
+package se.l4.otter.examples;
 
 import static org.junit.Assert.assertEquals;
 

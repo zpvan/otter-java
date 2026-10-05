@@ -27,7 +27,7 @@
 
 		<module>otter-engine</module>
 		<module>otter-model</module>
-		<module>my-ot</module>
+		<module>otter-examples</module>
  	</modules>
 
  	<dependencies>

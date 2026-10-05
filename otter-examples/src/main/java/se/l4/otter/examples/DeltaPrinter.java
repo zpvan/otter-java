@@ -1,4 +1,4 @@
-package com.ot.visual;
+package se.l4.otter.examples;
 
 import se.l4.otter.operations.Operation;
 import se.l4.otter.operations.string.AnnotationChange;
