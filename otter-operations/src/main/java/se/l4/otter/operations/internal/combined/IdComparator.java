@@ -14,7 +14,7 @@ import se.l4.otter.operations.combined.CombinedHandler;
 public class IdComparator
 	implements Comparator<Operation<CombinedHandler>>
 {
-	public static IdComparator INSTANCE = new IdComparator();
+	public static final IdComparator INSTANCE = new IdComparator();
 
 	private IdComparator()
 	{

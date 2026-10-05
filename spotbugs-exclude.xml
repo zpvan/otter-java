@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+	<!--
+		EI_EXPOSE_REP / EI_EXPOSE_REP2: these classes intentionally share
+		mutable state (arrays, serializers, editor references) instead of
+		making defensive copies. They are internal implementation details
+		(not part of the stable API) and the copies would sit on the hot
+		path of every operation transform.
+	-->
+	<Match>
+		<OR>
+			<Class name="se.l4.otter.operations.internal.list.ListDelete"/>
+			<Class name="se.l4.otter.operations.internal.list.ListInsert"/>
+			<Class name="se.l4.otter.operations.internal.string.DefaultAnnotationChange"/>
+			<Class name="se.l4.otter.operations.combined.CombinedType"/>
+			<Class name="se.l4.otter.operations.string.StringType"/>
+			<Class name="se.l4.otter.model.DefaultModel"/>
+			<Class name="se.l4.otter.model.internal.DefaultModelBuilder"/>
+			<Class name="se.l4.otter.model.internal.SharedObjectEditorImpl"/>
+			<Class name="se.l4.otter.model.spi.AbstractSharedObject"/>
+		</OR>
+		<OR>
+			<Bug pattern="EI_EXPOSE_REP"/>
+			<Bug pattern="EI_EXPOSE_REP2"/>
+		</OR>
+	</Match>
+
+	<!--
+		DefaultEditor is guarded by a ReentrantLock rather than synchronized
+		blocks, which SpotBugs cannot track.
+	-->
+	<Match>
+		<Class name="se.l4.otter.engine.DefaultEditor"/>
+		<Bug pattern="IS2_INCONSISTENT_SYNC"/>
+	</Match>
+
+	<!--
+		DefaultModel fails fast from its constructor if the initial state is
+		invalid; that is intentional.
+	-->
+	<Match>
+		<Class name="se.l4.otter.model.DefaultModel"/>
+		<Bug pattern="CT_CONSTRUCTOR_THROW"/>
+	</Match>
+</FindBugsFilter>

@@ -8,7 +8,7 @@ import se.l4.otter.operations.internal.map.MapOperation;
 public class MapKeyComparator
 	implements Comparator<Operation<MapHandler>>
 {
-	public static MapKeyComparator INSTANCE = new MapKeyComparator();
+	public static final MapKeyComparator INSTANCE = new MapKeyComparator();
 
 	private MapKeyComparator()
 	{

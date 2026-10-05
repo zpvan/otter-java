@@ -59,6 +59,8 @@ public class StringOperationSerializer
 				case "annotations":
 					readAnnotation(in, delta);
 					break;
+				default:
+					throw new IOException("Unknown string operation type: " + type);
 			}
 
 			while(in.peek() != Token.LIST_END)

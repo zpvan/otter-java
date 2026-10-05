@@ -88,6 +88,9 @@ public class DefaultStringDelta<ReturnPath>
 					operations.add(new StringAnnotationChange(annotationChange));
 				}
 				break;
+			default:
+				// EMPTY: nothing to flush
+				break;
 		}
 
 		characters.setLength(0);
