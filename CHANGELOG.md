@@ -30,8 +30,13 @@ with `mvn install`.
 - **Java baseline is now 21** (was 9).
 - Build plugins: maven-compiler-plugin 3.14.1, maven-surefire-plugin 3.5.4,
   spotbugs-maven-plugin 4.10.4.1.
-- Dependencies: junit 4.13.2 (was 4.9), slf4j 2.0.17 (was 1.7.30, unified
-  via the `slf4j.version` property).
+- Dependencies: JUnit 4 → JUnit Jupiter 5.11.4 (all 122 tests migrated),
+  hamcrest 2.2, slf4j 2.0.17 (was 1.7.30, unified via the `slf4j.version`
+  property), spotbugs-annotations 4.10.4 (test scope, needed on the module
+  path by se.l4.ylem).
+- All five modules are now explicit JPMS modules (`module-info.java`).
+  `SerializerTestHelper` no longer uses exobytes' internal streaming package;
+  it goes through the public `StreamingFormat.JSON` API instead.
 - SpotBugs findings triaged to zero: comparator singletons are now `final`,
   switches have `default` branches (unknown string operation type now throws
   `IOException` during deserialization), and intentional patterns are

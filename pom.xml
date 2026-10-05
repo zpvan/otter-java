@@ -48,6 +48,13 @@
 			<artifactId>hamcrest</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- Required on the module path by se.l4.ylem.types.instances when running tests -->
+		<dependency>
+			<groupId>com.github.spotbugs</groupId>
+			<artifactId>spotbugs-annotations</artifactId>
+			<scope>test</scope>
+		</dependency>
  	</dependencies>
 
 	<dependencyManagement>
@@ -63,6 +70,13 @@
 				<groupId>org.hamcrest</groupId>
 				<artifactId>hamcrest</artifactId>
 				<version>2.2</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>com.github.spotbugs</groupId>
+				<artifactId>spotbugs-annotations</artifactId>
+				<version>4.10.4</version>
 				<scope>test</scope>
 			</dependency>
 		</dependencies>
