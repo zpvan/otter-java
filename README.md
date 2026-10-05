@@ -1,5 +1,7 @@
 # Otter
 
+English | [简体中文](README.zh-CN.md)
+
 [![CI](https://github.com/zpvan/otter-java/actions/workflows/ci.yml/badge.svg)](https://github.com/zpvan/otter-java/actions/workflows/ci.yml)
 
 Otter is a library to support collaborative realtime editing using
