@@ -42,7 +42,8 @@ with `mvn install`.
   `IOException` during deserialization), and intentional patterns are
   suppressed with justifications in `spotbugs-exclude.xml`.
 - CI rewritten: GitHub Actions v4 with a Temurin JDK 21/25 matrix (was
-  deprecated v1 actions on JDK 9).
+  deprecated v1 actions on JDK 9); runs `mvn verify` so SpotBugs findings
+  fail the build.
 - revapi upgraded to 0.15.1 (revapi-java 0.28.4) and moved to the `release`
   profile — API checks gate releases, not day-to-day builds.
 
