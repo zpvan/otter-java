@@ -1,8 +1,40 @@
 # Otter
 
+[![CI](https://github.com/zpvan/otter-java/actions/workflows/ci.yml/badge.svg)](https://github.com/zpvan/otter-java/actions/workflows/ci.yml)
+
 Otter is a library to support collaborative realtime editing using
 [Operational Transformation](https://en.wikipedia.org/wiki/Operational_transformation).
-This repository contains the Java-implementation.
+This repository contains the Java-implementation (forked from
+[LevelFourAB/otter-java](https://github.com/LevelFourAB/otter-java)).
+
+## Requirements
+
+- Java 21+
+- Maven 3.6+
+
+## Building
+
+This fork is not published to Maven Central; build and install it locally:
+
+```bash
+mvn install
+```
+
+API compatibility checks (revapi) only run with the `release` profile:
+
+```bash
+mvn -Prelease verify -Dgpg.skip=true
+```
+
+## Modules
+
+| Module | Description |
+| --- | --- |
+| `otter-common` | Shared utilities (locks, event helpers) |
+| `otter-operations` | OT algorithms for strings, lists, maps and combined documents |
+| `otter-engine` | Editing engine: editors, synchronization, history |
+| `otter-model` | High-level API with shared objects (map, string, list) |
+| `otter-examples` | Runnable examples, including a console demo of concurrent edits |
 
 ## Using Otter
 
@@ -31,7 +63,7 @@ Editor<Operation<StringHandler>> editor = new DefaultEditor<>(uniqueSessionId, s
 // Get the initial content and register a listener
 try(CloseableLock lock = editor.lock()) {
   editor.getCurrent().apply( ... );
-  
+
   editor.addEditorListener(new EditorEventHandler());
 }
 
@@ -73,7 +105,7 @@ between all editors of the model.
 Here is a tiny example of working with the model:
 
 ```java
-Editor editor = new DefaultEditor(uniqueSessionId, sync); 
+Editor editor = new DefaultEditor(uniqueSessionId, sync);
 Model model = Model.builder(editor)
   .build();
 
@@ -85,3 +117,22 @@ model.set("title", title);
 // Set a primitive value in the map
 model.set("priority", 10);
 ```
+
+## Running the console demo
+
+The `otter-examples` module contains a demo that replays three classic
+concurrent-editing scenarios on two editors and prints each transformation
+step:
+
+```bash
+mvn install -DskipTests
+mvn -pl otter-examples dependency:build-classpath -Dmdep.outputFile=cp.txt -q
+java -cp "otter-examples/target/classes:$(cat otter-examples/cp.txt)" se.l4.otter.examples.OtterConsoleDemo
+```
+
+The demo exits non-zero if the two clients do not converge on the same
+document.
+
+## License
+
+[Apache License 2.0](LICENSE.txt)
