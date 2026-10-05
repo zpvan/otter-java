@@ -23,7 +23,7 @@ public class OtConsoleDemo
 			"1. Concurrent inserts at different positions",
 			"hello",
 			StringDelta.builder().retain(5).insert(" A").done(),
-			StringDelta.builder().insert("B ").done(),
+			StringDelta.builder().insert("B ").retain(5).done(),
 			"B hello A"
 		);
 
@@ -40,8 +40,8 @@ public class OtConsoleDemo
 		ok &= scenario(
 			"3. Insert racing with delete",
 			"hello world",
-			StringDelta.builder().retain(6).insert("brave ").done(),
-			StringDelta.builder().delete("hello ").done(),
+			StringDelta.builder().retain(6).insert("brave ").retain(5).done(),
+			StringDelta.builder().delete("hello ").retain(5).done(),
 			"brave world"
 		);
 
