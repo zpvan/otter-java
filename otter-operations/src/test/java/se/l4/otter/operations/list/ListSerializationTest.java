@@ -3,7 +3,7 @@ package se.l4.otter.operations.list;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import se.l4.exobytes.Serializer;
 import se.l4.otter.operations.Operation;

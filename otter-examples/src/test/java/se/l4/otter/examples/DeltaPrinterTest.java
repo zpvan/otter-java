@@ -1,8 +1,8 @@
 package se.l4.otter.examples;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import se.l4.otter.operations.Operation;
 import se.l4.otter.operations.string.StringDelta;

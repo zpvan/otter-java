@@ -1,9 +1,9 @@
 package se.l4.otter.operations.list;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import se.l4.otter.operations.Operation;
 import se.l4.otter.operations.OperationPair;

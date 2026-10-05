@@ -2,7 +2,7 @@ package se.l4.otter.operations.map;
 
 import java.util.ArrayList;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import se.l4.exobytes.Serializer;
 import se.l4.otter.operations.Operation;

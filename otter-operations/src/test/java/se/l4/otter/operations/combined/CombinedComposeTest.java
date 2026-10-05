@@ -1,10 +1,10 @@
 package se.l4.otter.operations.combined;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import se.l4.otter.operations.Operation;
 import se.l4.otter.operations.map.MapDelta;
@@ -13,7 +13,7 @@ public class CombinedComposeTest
 {
 	private CombinedType type;
 
-	@Before
+	@BeforeEach
 	public void setup()
 	{
 		type = new CombinedTypeBuilder().build();

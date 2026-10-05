@@ -1,10 +1,10 @@
 package se.l4.otter.operations.map;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.eclipse.collections.api.factory.Lists;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import se.l4.otter.operations.CompoundOperation;
 import se.l4.otter.operations.DefaultCompoundOperation;

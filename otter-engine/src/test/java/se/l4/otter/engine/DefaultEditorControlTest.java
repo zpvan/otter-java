@@ -1,10 +1,10 @@
 package se.l4.otter.engine;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import se.l4.otter.operations.Operation;
 import se.l4.otter.operations.string.StringDelta;
@@ -15,7 +15,7 @@ public class DefaultEditorControlTest
 {
 	private EditorControl<Operation<StringHandler>> control;
 
-	@Before
+	@BeforeEach
 	public void setupEditorControl()
 	{
 		control = new DefaultEditorControl<>(

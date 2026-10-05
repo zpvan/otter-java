@@ -1,14 +1,14 @@
 package se.l4.otter.model;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import se.l4.otter.engine.DefaultEditor;
 import se.l4.otter.engine.DefaultEditorControl;
@@ -29,7 +29,7 @@ public class DefaultModelTest
 	private DefaultEditorControl<Operation<CombinedHandler>> control;
 	private LocalOperationSync<Operation<CombinedHandler>> sync;
 
-	@Before
+	@BeforeEach
 	public void setupEditor()
 	{
 		control = new DefaultEditorControl<>(
@@ -38,7 +38,7 @@ public class DefaultModelTest
 		sync = new LocalOperationSync<>(control);
 	}
 
-	@After
+	@AfterEach
 	public void close()
 		throws IOException
 	{
