@@ -151,7 +151,6 @@ public class SharedStringImpl
 		try(CloseableLock lock = editor.lock())
 		{
 			int length = this.value.length();
-			// this.value.insert(idx, value);
 
 			editor.apply(StringDelta.builder()
 				.retain(idx)
