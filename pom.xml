@@ -18,6 +18,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<slf4j.version>2.0.17</slf4j.version>
 	</properties>
 
 	<modules>
@@ -33,19 +34,12 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.30</version>
+			<version>${slf4j.version}</version>
 		</dependency>
 
  		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.carrotsearch.randomizedtesting</groupId>
-			<artifactId>randomizedtesting-runner</artifactId>
-			<version>2.3.3</version>
 			<scope>test</scope>
 		</dependency>
  	</dependencies>
@@ -55,7 +49,7 @@
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
-				<version>4.9</version>
+				<version>4.13.2</version>
 				<scope>test</scope>
 			</dependency>
 		</dependencies>
@@ -86,30 +80,23 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
+				<version>3.14.1</version>
 				<configuration>
-					<release>9</release>
+					<release>21</release>
 				</configuration>
 			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.0.0-M5</version>
+				<version>3.5.4</version>
 			</plugin>
 
 			<plugin>
 				<groupId>com.github.spotbugs</groupId>
 				<artifactId>spotbugs-maven-plugin</artifactId>
-				<version>4.2.0</version>
+				<version>4.10.4.1</version>
 
-				<dependencies>
-					<dependency>
-						<groupId>com.github.spotbugs</groupId>
-						<artifactId>spotbugs</artifactId>
-						<version>4.2.1</version>
-					</dependency>
-				</dependencies>
 				<executions>
 					<execution>
 						<goals>
@@ -235,7 +222,7 @@
 						<version>3.2.0</version>
 						<configuration>
 							<doclint>none</doclint>
-							<source>9</source>
+							<source>21</source>
 
 							<excludePackageNames>*.internal.*</excludePackageNames>
 						</configuration>
